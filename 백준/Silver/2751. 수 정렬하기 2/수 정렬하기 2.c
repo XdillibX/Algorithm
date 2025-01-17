@@ -3,18 +3,11 @@
 
 long num[1000000];
 
-int static compare (const void* first, const void* second)
-{
-    if (*(int*)first > *(int*)second)
-        return 1;
-    else if (*(int*)first < *(int*)second)
-        return -1;
-    else
-        return 0;
+int static compare (const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
 }
 
-int main(void)
-{
+int main(void) {
     long n;
     
     scanf("%ld", &n);
@@ -25,7 +18,9 @@ int main(void)
 
     qsort(num, n, sizeof(long), compare);
 
-    for (long i = 0; i < n; i++) printf("%ld\n", num[i]);
+    for (long i = 0; i < n; i++) {
+        printf("%ld\n", num[i]);
+    }
 
     return 0;
 }
