@@ -7,71 +7,61 @@ int compare(const void* a, const void* b) {
     else return -1;
 }
 
-int arith(int list[], int n) {
+int arith(int num[], int n) {
     double sum = 0;
 
     for (int i = 0; i < n; i++) {
-        sum += (list[i]);
+        sum += (num[i]);
     }
 
     return round(sum / n);
 }
 
-int median(int list[], int n) {
-    if (n == 1) return list[0];
-    else return list[(n + 1) / 2 - 1];
+int median(int num[], int n) {
+    if (n == 1) return num[0];
+    else return num[(n + 1) / 2 - 1];
 }
 
-int Mode(int list[], int n) {
-    int ar[8001] = { 0 };
-    int i, idx, max = 0, cnt = 0;
-
-    for (i = 0; i < n; i++)
-    {
-        idx = list[i] + 4000;
-        ar[idx] += 1;
-        
-        if (ar[idx] > max)
-            max = ar[idx];
+int Mode(int num[], int n) {
+    int arr[8001] = {0};
+    int max = 0;
+    int idx = 0;
+    int cnt = 0;
+    
+    for (int i = 0; i < n; i++) {
+        arr[num[i] + 4000]++;
     }
-
-    for (i = 0, idx = 0; i < 8001 ; i++)
-    {
-        if (ar[i] == 0)
-            continue;
-
-        if (ar[i] == max)
-        {
-            if (cnt == 0)
-            {
-                idx = i;
-                cnt += 1;
-            }
-            else if (cnt == 1)
-            {
-                idx = i;
-                break;
-            }
+    for (int i = 0; i < 8001; i++) {
+        if (arr[i] == 0) continue;
+        if (max <= arr[i]) {
+            max = arr[i];
+        }
+    }
+    for (int i = 0; i < 8001; i++) {
+        if (arr[i] == 0) continue;
+        if (max == arr[i]) {
+            idx = i;
+            cnt++;
+        }
+        if (cnt == 2) {
+            max = i - 4000;
+            return max;
         }
     }
     return idx - 4000;
-
 }
 
-int range(int list[], int n) {
-    int max = list[n - 1];
-    int min = list[0];
-
-    return max - min;
+int range(int num[], int n) {
+    return num[n - 1] - num[0];
 }
 
 int main(void) {
-    int i, n;
+    int n;
     int num[500000];
 
     scanf("%d", &n);
 
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         scanf("%d", &num[i]);
     }
     
